@@ -50,12 +50,13 @@ export default {
     ),
 
   LessThan: () => P.string('<'),
-
   GreaterThan: () => P.string('>'),
-
   Equals: () => P.string('='),
-
   LessThanOrEqual: () => P.string('<='),
-
   GreaterThanOrEqual: () => P.string('>='),
+
+  Plus: () => P.string('+'),
+  Minus: () => P.string('-'),
+  Asterisk: () => P.string('*'),
+  Slash: () => P.string('/'),
 };

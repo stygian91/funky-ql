@@ -1,0 +1,19 @@
+{
+  "presets": ["@babel/preset-env"],
+  "env": {
+    "es": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "modules": false
+          }
+        ]
+      ],
+      "ignore": ["**/*.test.js"]
+    },
+    "cjs": {
+      "ignore": ["**/*.test.js"]
+    }
+  }
+}

@@ -1,26 +1,32 @@
 import P from "parsimmon";
+
 import { setName } from "../utils";
 
 export default {
   Where: (r) => P
     .string('where')
     .skip(P.optWhitespace)
-    .then(r.Comparison)
+    .then(P.alt(r.LogicalExpression, r.WhereCondition))
     .map(value => ({
       name: 'Where',
       value,
     })),
 
-  Comparison: (r) => P.seqObj(
-    P.optWhitespace,
+  WhereCondition: (r) => P.seqObj(
     ['left', r.FieldIdentifier],
-    P.optWhitespace,
-    ['operator', r.ComparisonOperator],
-    P.optWhitespace,
+    ['operator', r.ComparisonOperator.trim(P.optWhitespace)],
     ['right', r.Expression],
-    P.optWhitespace,
   )
-  .map(setName('Comparison')),
+  .trim(P.optWhitespace)
+  .map(setName('WhereCondition')),
+
+  LogicalExpression: (r) => P.seqObj(
+    ['left', r.WhereCondition],
+    ['operator', P.regex(/and|or/).trim(P.optWhitespace)],
+    ['right', P.alt(r.LogicalExpression, r.WhereCondition)],
+  )
+  .trim(P.optWhitespace)
+  .map(setName('LogicalExpression')),
 
   ComparisonOperator: (r) => P.alt(
     r.LessThanOrEqual,

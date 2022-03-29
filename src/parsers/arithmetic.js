@@ -15,16 +15,12 @@ export default {
   })),
 
   ArithmeticOperation: (r) => P.seqObj(
-    P.string('('),
-    P.optWhitespace,
     ['left', r.Term],
-    P.optWhitespace,
-    ['operator', r.ArithmeticOperator],
-    P.optWhitespace,
+    ['operator', r.ArithmeticOperator.trim(P.optWhitespace)],
     ['right', r.Term],
-    P.optWhitespace,
-    P.string(')'),
   )
+  .trim(P.optWhitespace)
+  .wrap(P.string('('), P.string(')'))
   .map(setName('ArithmeticOperation')),
 
 

@@ -63,9 +63,9 @@ describe("Where", () => {
   });
 
   test("comparison", () => {
-    const ast = language.Comparison.tryParse('`asd` > (2 * `qwe`)');
+    const ast = language.WhereCondition.tryParse('`asd` > (2 * `qwe`)');
     expect(ast).toEqual({
-      name: 'Comparison',
+      name: 'WhereCondition',
       operator: '>',
       left: {
         name: 'FieldIdentifier',
@@ -98,7 +98,7 @@ describe("Where", () => {
     expect(ast).toEqual({
       name: 'Where',
       value: {
-        name: 'Comparison',
+        name: 'WhereCondition',
         left: {
           name: 'FieldIdentifier',
           value: 'foo',
@@ -114,5 +114,67 @@ describe("Where", () => {
         },
       },
     });
+  });
+
+  test("condition list", () => {
+    const ast = language.LogicalExpression.tryParse('`a` > 2 and `b` = "something" or `c` <= 3.14');
+    const expected = {
+      name: 'LogicalExpression',
+      left: {
+        name: 'WhereCondition',
+        left: {
+          name: 'FieldIdentifier',
+          value: 'a',
+        },
+        operator: '>',
+        right: {
+          name: 'Expression',
+          value: {
+            name: 'Number',
+            numberType: 'Integer',
+            value: 2,
+          },
+        },
+      },
+      operator: 'and',
+      right: {
+        name: 'LogicalExpression',
+        left: {
+          name: 'WhereCondition',
+          left: {
+            name: 'FieldIdentifier',
+            value: 'b',
+          },
+          operator: '=',
+          right: {
+            name: 'Expression',
+            value: {
+              name: 'String',
+              value: 'something',
+              quoteType: '"',
+            },
+          },
+        },
+        operator: 'or',
+        right: {
+          name: 'WhereCondition',
+          left: {
+            name: 'FieldIdentifier',
+            value: 'c',
+          },
+          operator: '<=',
+          right: {
+            name: 'Expression',
+            value: {
+              name: 'Number',
+              numberType: 'Float',
+              value: 3.14,
+            },
+          },
+        },
+      },
+    };
+
+    expect(ast).toEqual(expected);
   });
 });

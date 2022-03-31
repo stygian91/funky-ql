@@ -23,7 +23,6 @@ export default {
   .wrap(P.string('('), P.string(')'))
   .map(setName('ArithmeticOperation')),
 
-
   Term: (r) => P.alt(
     r.ArithmeticOperation,
     r.FieldIdentifier,

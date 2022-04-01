@@ -1,5 +1,6 @@
 import { fieldIdentifier, number, string } from "./terminals";
 import { arithmeticOperation } from "./arithmetic";
+import functionCall from "./function";
 
 const where = (ast) => {
   const inner = ast.value;
@@ -48,6 +49,9 @@ export const expression = (ast) => {
 
     case "ArithmeticOperation":
       return arithmeticOperation(inner);
+
+    case "FunctionCall":
+      return functionCall(inner);
 
     default:
       throw new Error("Invalid expression type.");

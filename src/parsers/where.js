@@ -38,6 +38,7 @@ export default {
 
   Expression: (r) => P.alt(
     r.ArithmeticOperation,
+    r.FunctionCall,
     r.FieldIdentifier,
     r.Number,
     r.String,

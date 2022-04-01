@@ -6,6 +6,7 @@ import where from "./parsers/where";
 import arithmetic from "./parsers/arithmetic";
 import query from "./parsers/query";
 import program from "./parsers/program";
+import _function from "./parsers/function";
 
 export default Parsimmon.createLanguage({
   ...terminals,
@@ -13,5 +14,6 @@ export default Parsimmon.createLanguage({
   ...arithmetic,
   ...where,
   ...query,
+  ..._function,
   ...program,
 });

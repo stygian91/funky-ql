@@ -152,18 +152,21 @@ describe("Where", () => {
     const expected = {
       name: 'LogicalExpression',
       left: {
-        name: 'Comparison',
-        left: {
-          name: 'FieldIdentifier',
-          value: 'a',
-        },
-        operator: '>',
-        right: {
-          name: 'Expression',
-          value: {
-            name: 'Number',
-            numberType: 'Integer',
-            value: 2,
+        name: 'Expression',
+        value: {
+          name: 'Comparison',
+          left: {
+            name: 'FieldIdentifier',
+            value: 'a',
+          },
+          operator: '>',
+          right: {
+            name: 'Expression',
+            value: {
+              name: 'Number',
+              numberType: 'Integer',
+              value: 2,
+            },
           },
         },
       },
@@ -171,35 +174,41 @@ describe("Where", () => {
       right: {
         name: 'LogicalExpression',
         left: {
-          name: 'Comparison',
-          left: {
-            name: 'FieldIdentifier',
-            value: 'b',
-          },
-          operator: '=',
-          right: {
-            name: 'Expression',
-            value: {
-              name: 'String',
-              value: 'something',
-              quoteType: '"',
+          name: 'Expression',
+          value: {
+            name: 'Comparison',
+            left: {
+              name: 'FieldIdentifier',
+              value: 'b',
+            },
+            operator: '=',
+            right: {
+              name: 'Expression',
+              value: {
+                name: 'String',
+                value: 'something',
+                quoteType: '"',
+              },
             },
           },
         },
         operator: 'or',
         right: {
-          name: 'Comparison',
-          left: {
-            name: 'FieldIdentifier',
-            value: 'c',
-          },
-          operator: '<=',
-          right: {
-            name: 'Expression',
-            value: {
-              name: 'Number',
-              numberType: 'Float',
-              value: 3.14,
+          name: 'Expression',
+          value: {
+            name: 'Comparison',
+            left: {
+              name: 'FieldIdentifier',
+              value: 'c',
+            },
+            operator: '<=',
+            right: {
+              name: 'Expression',
+              value: {
+                name: 'Number',
+                numberType: 'Float',
+                value: 3.14,
+              },
             },
           },
         },

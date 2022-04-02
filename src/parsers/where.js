@@ -21,9 +21,9 @@ export default {
   .map(setName('Comparison')),
 
   LogicalExpression: (r) => P.seqObj(
-    ['left', r.Comparison],
+    ['left', r.Expression],
     ['operator', P.regex(/and|or/).trim(P.optWhitespace)],
-    ['right', P.alt(r.LogicalExpression, r.Comparison)],
+    ['right', P.alt(r.LogicalExpression, r.Expression)],
   )
   .trim(P.optWhitespace)
   .map(setName('LogicalExpression')),
@@ -43,7 +43,7 @@ export default {
     r.FieldIdentifier,
     r.Number,
     r.String,
-    r.Bool,
+    r.Bool
   )
   .map(value => ({
     name: 'Expression',

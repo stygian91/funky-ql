@@ -26,10 +26,10 @@ export const comparison = (ast) => {
 };
 
 export const logicalExpression = (ast) => {
-  const left = comparison(ast.left);
+  const left = expression(ast.left);
   const operator = ast.operator === "and" ? "&&" : "||";
-  const right = ast.right.name === "Comparison" ?
-    comparison(ast.right) : logicalExpression(ast.right);
+  const right = ast.right.name === "Expression" ?
+    expression(ast.right) : logicalExpression(ast.right);
 
   return `${left} ${operator} ${right}`;
 };

@@ -152,5 +152,126 @@ describe('function', () => {
         },
       ],
     });
+
+    const ast2 = language.Array.tryParse('[1, [2, 3]]');
+    expect(ast2).toEqual({
+      name: 'Array',
+      value: [
+        {
+          name: 'Expression',
+          value: {
+            name: 'Number',
+            numberType: 'Integer',
+            value: 1,
+          },
+        },
+        {
+          name: 'Expression',
+          value: {
+            name: 'Array',
+            value: [
+              {
+                name: 'Expression',
+                value: {
+                  name: 'Number',
+                  numberType: 'Integer',
+                  value: 2,
+                },
+              },
+              {
+                name: 'Expression',
+                value: {
+                  name: 'Number',
+                  numberType: 'Integer',
+                  value: 3,
+                },
+              },
+            ],
+          },
+        },
+      ],
+    });
+  });
+
+  test('object', () => {
+    const ast = language.Object.tryParse('{ key1: "str", key2: 2, key3: 3.14 }');
+    expect(ast).toEqual({
+      name: 'Object',
+      value: [
+        {
+          key: 'key1',
+          value: {
+            name: 'Expression',
+            value: {
+              name: 'String',
+              value: "str",
+              quoteType: '"',
+            },
+          },
+        },
+        {
+          key: 'key2',
+          value: {
+            name: 'Expression',
+            value: {
+              name: 'Number',
+              numberType: 'Integer',
+              value: 2,
+            },
+          },
+        },
+        {
+          key: 'key3',
+          value: {
+            name: 'Expression',
+            value: {
+              name: 'Number',
+              numberType: 'Float',
+              value: 3.14,
+            },
+          },
+        },
+      ],
+    });
+
+    const ast2 = language.Object.tryParse('{ key1: 1, key2: { key1: 99 } }');
+    expect(ast2).toEqual({
+      name: 'Object',
+      value: [
+        {
+          key: 'key1',
+          value: {
+            name: 'Expression',
+            value: {
+              name: 'Number',
+              numberType: 'Integer',
+              value: 1,
+            },
+          },
+        },
+        {
+          key: 'key2',
+          value: {
+            name: 'Expression',
+            value: {
+              name: 'Object',
+              value: [
+                {
+                  key: 'key1',
+                  value: {
+                    name: 'Expression',
+                    value: {
+                      name: 'Number',
+                      value: 99,
+                      numberType: 'Integer',
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    });
   });
 });

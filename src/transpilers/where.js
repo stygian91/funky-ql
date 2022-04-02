@@ -1,6 +1,6 @@
 import { bool, fieldIdentifier, number, string } from "./terminals";
 import { arithmeticOperation } from "./arithmetic";
-import functionCall from "./function";
+import functionCall, { array, object } from "./function";
 
 const where = (ast) => {
   const inner = ast.value;
@@ -58,6 +58,12 @@ export const expression = (ast) => {
 
     case "Comparison":
       return comparison(inner);
+
+    case "Array":
+      return array(inner);
+
+    case "Object":
+      return object(inner);
 
     default:
       throw new Error("Invalid expression type.");

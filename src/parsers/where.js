@@ -42,6 +42,7 @@ export default {
     r.FunctionCall,
     r.FieldIdentifier,
     r.Array,
+    r.Object,
     r.Number,
     r.String,
     r.Bool

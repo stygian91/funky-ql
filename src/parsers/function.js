@@ -31,4 +31,19 @@ export default {
     P.string(']'),
   )
   .map(value => ({ name: 'Array', value })),
+
+  Object: (r) => P.sepBy(
+    P.seqObj(
+      ['key', r.Identifier.trim(P.optWhitespace)],
+      P.string(':').trim(P.optWhitespace),
+      ['value', r.Expression.trim(P.optWhitespace)]
+    ),
+    P.string(',').trim(P.optWhitespace)
+  )
+  .trim(P.optWhitespace)
+  .wrap(
+    P.string('{'),
+    P.string('}')
+  )
+  .map(value => ({ name: 'Object', value })),
 };

@@ -1,5 +1,5 @@
 import language from "../../src/language";
-import functionCall, { functionArguments } from "../../src/transpilers/function";
+import functionCall, { array, functionArguments, object } from "../../src/transpilers/function";
 
 describe('transpiles functions', () => {
   test('regular call', () => {
@@ -43,5 +43,15 @@ describe('transpiles functions', () => {
       ],
     };
     expect(() => functionArguments(ast2)).toThrow();
+  });
+
+  test('array', () => {
+    const ast = language.Array.tryParse('[1, [2, 3]]');
+    expect(array(ast)).toEqual('[1, [2, 3]]');
+  });
+
+  test('object', () => {
+    const ast = language.Object.tryParse('{key1: 1, key2: {key1: 2}}');
+    expect(object(ast)).toEqual('{key1: 1, key2: {key1: 2}}');
   });
 });

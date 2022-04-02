@@ -101,4 +101,14 @@ export const functionArguments = (ast) => {
 
 const placeholder = () => `F.__`;
 
+export const array = (ast) => {
+  const expressions = ast.value.map(expression);
+  return `[${expressions.join(', ')}]`;
+};
+
+export const object = (ast) => {
+  const props = ast.value.map(prop => `${prop.key}: ${expression(prop.value)}`);
+  return `{${props.join(', ')}}`;
+};
+
 export default functionCall;

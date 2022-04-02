@@ -133,6 +133,18 @@ describe("Where", () => {
         },
       },
     });
+
+    const ast2 = language.Where.tryParse('where true');
+    expect(ast2).toEqual({
+      name: 'Where',
+      value: {
+        name: 'Expression',
+        value: {
+          name: 'Bool',
+          value: true,
+        },
+      },
+    });
   });
 
   test("condition list", () => {

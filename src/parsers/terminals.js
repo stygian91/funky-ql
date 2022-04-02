@@ -48,7 +48,9 @@ export default {
     )
     .map(F.assoc('name', 'FieldIdentifier')),
 
-  FunctionIdentifier: () => P.regex(/[A-Za-z_][A-Za-z0-9_]*/),
+  Identifier: () => P.regex(/[A-Za-z_][A-Za-z0-9_]*/),
+
+  FunctionIdentifier: (r) => r.Identifier,
 
   CommaWithWhitespace: () => P
     .seq(

@@ -13,7 +13,10 @@ export default {
   .map(setName('FunctionCall')),
 
   FunctionArguments: (r) => P.sepBy(
-    r.Expression,
+    P.alt(
+      P.string('__').map(value => ({ name: 'Placeholder', value })),
+      r.Expression
+    ),
     P.string(',').trim(P.optWhitespace)
   )
   .trim(P.optWhitespace)

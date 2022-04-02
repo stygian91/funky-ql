@@ -1,5 +1,5 @@
 import language from "../../src/language";
-import functionCall from "../../src/transpilers/function";
+import functionCall, { functionArguments } from "../../src/transpilers/function";
 
 describe('transpiles functions', () => {
   test('regular call', () => {
@@ -27,5 +27,21 @@ describe('transpiles functions', () => {
     const ast = language.FunctionCall.tryParse('qwerty(1, 2, 3)');
 
     expect(() => functionCall(ast)).toThrow();
+  });
+
+  test('function arguments', () => {
+    const ast = language.FunctionArguments.tryParse('1, __');
+    expect(functionArguments(ast)).toEqual('1, F.__');
+
+    const ast2 = {
+      name: 'FunctionArguments',
+      value: [
+        {
+          name: 'unknown',
+          value: 42,
+        },
+      ],
+    };
+    expect(() => functionArguments(ast2)).toThrow();
   });
 });

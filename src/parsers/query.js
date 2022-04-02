@@ -4,7 +4,7 @@ import { setName } from "../utils";
 
 export default {
   Query: (r) => P.seqObj(
-    ['queryName', P.regex(/[A-Za-z_][A-Za-z0-9_]*/)],
+    ['queryName', r.Identifier],
 
     P.string(':=')
       .trim(P.optWhitespace),

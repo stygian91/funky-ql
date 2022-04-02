@@ -1,4 +1,4 @@
-import { fieldIdentifier, number, string } from "./terminals";
+import { bool, fieldIdentifier, number, string } from "./terminals";
 import { arithmeticOperation } from "./arithmetic";
 import functionCall from "./function";
 
@@ -43,6 +43,9 @@ export const expression = (ast) => {
 
     case "String":
       return string(inner);
+
+    case "Bool":
+      return bool(inner);
 
     case "FieldIdentifier":
       return fieldIdentifier(inner);

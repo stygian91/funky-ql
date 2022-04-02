@@ -8,3 +8,5 @@ export const string = (ast) => {
   const quote = ast.quoteType;
   return quote + ast.value + quote;
 };
+
+export const bool = (ast) => ast ? 'true' : 'false';

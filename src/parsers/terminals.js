@@ -34,6 +34,12 @@ export default {
         })),
     ),
 
+  Bool: () => P.alt(
+    P.string('true'),
+    P.string('false')
+  )
+  .map(value => ({ name: 'Bool', value: value === 'true' })),
+
   FieldIdentifier: () =>
     P.seqObj(
       P.string('`'),

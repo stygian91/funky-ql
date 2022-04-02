@@ -42,6 +42,7 @@ export default {
     r.FieldIdentifier,
     r.Number,
     r.String,
+    r.Bool,
   )
   .map(value => ({
     name: 'Expression',

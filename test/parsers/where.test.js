@@ -60,6 +60,22 @@ describe("Where", () => {
         value: 'foobar',
       },
     });
+
+    expect(expression.tryParse('true')).toEqual({
+      name: 'Expression',
+      value: {
+        name: 'Bool',
+        value: true,
+      },
+    });
+
+    expect(expression.tryParse('false')).toEqual({
+      name: 'Expression',
+      value: {
+        name: 'Bool',
+        value: false,
+      },
+    });
   });
 
   test("comparison", () => {

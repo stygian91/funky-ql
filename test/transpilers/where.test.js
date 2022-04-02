@@ -9,6 +9,7 @@ describe('Transpiles where', () => {
     const ast4 = language.WhereCondition.tryParse('`bar` <= 3');
     const ast5 = language.WhereCondition.tryParse('`bar` >= 10');
     const ast6 = language.WhereCondition.tryParse('`bar` >= (2 * 4)');
+    const ast7 = language.Expression.tryParse('true');
 
     expect(whereCondition(ast)).toEqual('(F.path(`a`, data) > F.path(`b`, data))');
     expect(whereCondition(ast2)).toEqual('(F.path(`foo`, data) === "foobar")');
@@ -20,6 +21,7 @@ describe('Transpiles where', () => {
       name: 'Expression',
       value: { value: 'b', name: 'lorem' }
     })).toThrow();
+    expect(expression(ast7)).toEqual('true');
   });
 
   test('simple logical expression', () => {

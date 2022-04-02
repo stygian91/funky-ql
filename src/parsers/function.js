@@ -21,4 +21,14 @@ export default {
   )
   .trim(P.optWhitespace)
   .map(args => ({ name: 'FunctionArguments', value: args })),
+
+  Array: (r) => r.Expression.sepBy(
+    P.string(',').trim(P.optWhitespace)
+  )
+  .trim(P.optWhitespace)
+  .wrap(
+    P.string('['),
+    P.string(']'),
+  )
+  .map(value => ({ name: 'Array', value })),
 };

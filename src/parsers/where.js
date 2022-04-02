@@ -41,6 +41,7 @@ export default {
     r.ArithmeticOperation,
     r.FunctionCall,
     r.FieldIdentifier,
+    r.Array,
     r.Number,
     r.String,
     r.Bool

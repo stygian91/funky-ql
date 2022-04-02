@@ -108,4 +108,49 @@ describe('function', () => {
 
     expect(ast).toEqual(expected);
   });
+
+  test('array', () => {
+    const ast = language.Array.tryParse('[1, 2, (2 * 3)]');
+    expect(ast).toEqual({
+      name: 'Array',
+      value: [
+        {
+          name: 'Expression',
+          value: {
+            name: 'Number',
+            numberType: 'Integer',
+            value: 1,
+          },
+        },
+        {
+          name: 'Expression',
+          value: {
+            name: 'Number',
+            numberType: 'Integer',
+            value: 2,
+          },
+        },
+        {
+          name: 'Expression',
+          value: {
+            name: 'ArithmeticOperation',
+            left: {
+              name: 'Number',
+              numberType: 'Integer',
+              value: 2,
+            },
+            operator: {
+              name: 'ArithmeticOperator',
+              value: '*',
+            },
+            right: {
+              name: 'Number',
+              numberType: 'Integer',
+              value: 3,
+            },
+          },
+        },
+      ],
+    });
+  });
 });

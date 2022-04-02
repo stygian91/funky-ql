@@ -6,8 +6,8 @@ const where = (ast) => {
   const inner = ast.value;
 
   switch (inner.name) {
-    case "WhereCondition":
-      return whereCondition(inner);
+    case "Expression":
+      return expression(inner);
 
     case "LogicalExpression":
       return logicalExpression(inner);
@@ -17,7 +17,7 @@ const where = (ast) => {
   }
 };
 
-export const whereCondition = (ast) => {
+export const comparison = (ast) => {
   const left = fieldIdentifier(ast.left);
   const operator = ast.operator === "=" ? "===" : ast.operator;
   const right = expression(ast.right);
@@ -26,10 +26,10 @@ export const whereCondition = (ast) => {
 };
 
 export const logicalExpression = (ast) => {
-  const left = whereCondition(ast.left);
+  const left = comparison(ast.left);
   const operator = ast.operator === "and" ? "&&" : "||";
-  const right = ast.right.name === "WhereCondition" ?
-    whereCondition(ast.right) : logicalExpression(ast.right);
+  const right = ast.right.name === "Comparison" ?
+    comparison(ast.right) : logicalExpression(ast.right);
 
   return `${left} ${operator} ${right}`;
 };
@@ -55,6 +55,9 @@ export const expression = (ast) => {
 
     case "FunctionCall":
       return functionCall(inner);
+
+    case "Comparison":
+      return comparison(inner);
 
     default:
       throw new Error("Invalid expression type.");

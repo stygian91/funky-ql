@@ -79,9 +79,9 @@ describe("Where", () => {
   });
 
   test("comparison", () => {
-    const ast = language.WhereCondition.tryParse('`asd` > (2 * `qwe`)');
+    const ast = language.Comparison.tryParse('`asd` > (2 * `qwe`)');
     expect(ast).toEqual({
-      name: 'WhereCondition',
+      name: 'Comparison',
       operator: '>',
       left: {
         name: 'FieldIdentifier',
@@ -114,18 +114,21 @@ describe("Where", () => {
     expect(ast).toEqual({
       name: 'Where',
       value: {
-        name: 'WhereCondition',
-        left: {
-          name: 'FieldIdentifier',
-          value: 'foo',
-        },
-        operator: ">",
-        right: {
-          name: 'Expression',
-          value: {
-            name: 'Number',
-            numberType: 'Float',
-            value: 3.14,
+        name: 'Expression',
+        value: {
+          name: 'Comparison',
+          left: {
+            name: 'FieldIdentifier',
+            value: 'foo',
+          },
+          operator: ">",
+          right: {
+            name: 'Expression',
+            value: {
+              name: 'Number',
+              numberType: 'Float',
+              value: 3.14,
+            },
           },
         },
       },
@@ -137,7 +140,7 @@ describe("Where", () => {
     const expected = {
       name: 'LogicalExpression',
       left: {
-        name: 'WhereCondition',
+        name: 'Comparison',
         left: {
           name: 'FieldIdentifier',
           value: 'a',
@@ -156,7 +159,7 @@ describe("Where", () => {
       right: {
         name: 'LogicalExpression',
         left: {
-          name: 'WhereCondition',
+          name: 'Comparison',
           left: {
             name: 'FieldIdentifier',
             value: 'b',
@@ -173,7 +176,7 @@ describe("Where", () => {
         },
         operator: 'or',
         right: {
-          name: 'WhereCondition',
+          name: 'Comparison',
           left: {
             name: 'FieldIdentifier',
             value: 'c',

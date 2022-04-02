@@ -26,18 +26,21 @@ describe('Query', () => {
         where: {
           name: 'Where',
           value: {
-            name: 'WhereCondition',
-            left: {
-              name: 'FieldIdentifier',
-              value: 'id',
-            },
-            operator: '=',
-            right: {
-              name: 'Expression',
-              value: {
-                name: 'Number',
-                numberType: 'Integer',
-                value: 1,
+            name: 'Expression',
+            value: {
+              name: 'Comparison',
+              left: {
+                name: 'FieldIdentifier',
+                value: 'id',
+              },
+              operator: '=',
+              right: {
+                name: 'Expression',
+                value: {
+                  name: 'Number',
+                  numberType: 'Integer',
+                  value: 1,
+                },
               },
             },
           },
@@ -71,18 +74,21 @@ describe('Query', () => {
         where: {
           name: 'Where',
           value: {
-            name: 'WhereCondition',
-            left: {
-              name: 'FieldIdentifier',
-              value: 'id',
-            },
-            operator: '=',
-            right: {
-              name: 'Expression',
-              value: {
-                name: 'Number',
-                value: 1,
-                numberType: 'Integer',
+            name: 'Expression',
+            value: {
+              name: 'Comparison',
+              left: {
+                name: 'FieldIdentifier',
+                value: 'id',
+              },
+              operator: '=',
+              right: {
+                name: 'Expression',
+                value: {
+                  name: 'Number',
+                  value: 1,
+                  numberType: 'Integer',
+                },
               },
             },
           },

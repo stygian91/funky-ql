@@ -54,18 +54,21 @@ describe('parses program', () => {
             where: {
               name: 'Where',
               value: {
-                name: 'WhereCondition',
-                left: {
-                  name: 'FieldIdentifier',
-                  value: 'bar',
-                },
-                operator: '=',
-                right: {
-                  name: 'Expression',
-                  value: {
-                    name: 'Number',
-                    numberType: 'Float',
-                    value: 3.14,
+                name: 'Expression',
+                value: {
+                  name: 'Comparison',
+                  left: {
+                    name: 'FieldIdentifier',
+                    value: 'bar',
+                  },
+                  operator: '=',
+                  right: {
+                    name: 'Expression',
+                    value: {
+                      name: 'Number',
+                      numberType: 'Float',
+                      value: 3.14,
+                    },
                   },
                 },
               },

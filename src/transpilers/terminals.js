@@ -9,4 +9,4 @@ export const string = (ast) => {
   return quote + ast.value + quote;
 };
 
-export const bool = (ast) => ast ? 'true' : 'false';
+export const bool = (ast) => ast.value ? 'true' : 'false';

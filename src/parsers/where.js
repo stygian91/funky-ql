@@ -6,24 +6,24 @@ export default {
   Where: (r) => P
     .string('where')
     .skip(P.optWhitespace)
-    .then(P.alt(r.LogicalExpression, r.WhereCondition))
+    .then(P.alt(r.LogicalExpression, r.Expression))
     .map(value => ({
       name: 'Where',
       value,
     })),
 
-  WhereCondition: (r) => P.seqObj(
+  Comparison: (r) => P.seqObj(
     ['left', r.FieldIdentifier],
     ['operator', r.ComparisonOperator.trim(P.optWhitespace)],
     ['right', r.Expression],
   )
   .trim(P.optWhitespace)
-  .map(setName('WhereCondition')),
+  .map(setName('Comparison')),
 
   LogicalExpression: (r) => P.seqObj(
-    ['left', r.WhereCondition],
+    ['left', r.Comparison],
     ['operator', P.regex(/and|or/).trim(P.optWhitespace)],
-    ['right', P.alt(r.LogicalExpression, r.WhereCondition)],
+    ['right', P.alt(r.LogicalExpression, r.Comparison)],
   )
   .trim(P.optWhitespace)
   .map(setName('LogicalExpression')),
@@ -37,6 +37,7 @@ export default {
   ),
 
   Expression: (r) => P.alt(
+    r.Comparison,
     r.ArithmeticOperation,
     r.FunctionCall,
     r.FieldIdentifier,

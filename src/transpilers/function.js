@@ -17,9 +17,13 @@ const permittedFunctionNames = [
   // logic
   "defaultTo",
   "equals",
+  "gt",
+  "gte",
   "isEmpty",
   "isNil",
   "ifElse",
+  "lt",
+  "lte",
   "when",
   "unless",
   "not",
